@@ -1,6 +1,7 @@
 import ejs from 'ejs';
 import pdf from 'html-pdf';
 import path from 'path';
+import { v4 } from 'uuid';
 
 export interface balanceItem {
     name: string;
@@ -28,12 +29,14 @@ class PdfManager {
    * @param data an html string
    * @returns true if pdf document is created, false otherwise
    */
-  static async save(data: string): Promise<boolean> {
+  static async save(data: string): Promise<Error | pdf.FileInfo> {
     return new Promise((resolve) => {
-      if (data == '') resolve(false);
-      pdf.create(data, { format: 'A4' }).toFile('./public/pdf/item.pdf', (err, res) => {
-        if (err || res == null) resolve(false);
-        resolve(true);
+      if (data == '') resolve(new Error('Invalid data string'));
+      const fileName: string = v4();
+      pdf.create(data, { format: 'A4' }).toFile(`./public/pdf/${fileName}.pdf`, (err: Error, res: pdf.FileInfo) => {
+        if (err || res == null) resolve(err);
+        res.filename = `${fileName}.pdf`;
+        resolve(res);
       });
     });
   }

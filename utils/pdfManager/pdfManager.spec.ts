@@ -41,7 +41,7 @@ describe('PdfManager Create Tests', () => {
     const item: string = await PdfManager.create(assets, liabilities);
     expect(item).to.be.a('string');
     expect(item.length).to.be.greaterThan(0);
-    PdfManager.save(item);
+    await PdfManager.save(item);
   });
 });
 
