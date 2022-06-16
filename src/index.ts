@@ -1,7 +1,7 @@
 import express from 'express';
 
-import pdfRoute from './routes/pdf';
 import staticRoute from './routes/static';
+import pdfRoute from './routes/pdf';
 
 const app: express.Application = express();
 

@@ -19,9 +19,10 @@ class PdfManager {
     const assetTotal: number = assets.reduce((pV, cV) => pV + cV.value, 0);
     const liabilityTotal: number = liabilities.reduce((pV, cV) => pV + cV.value, 0);
     const total: number = assetTotal - liabilityTotal;
-    const file: string = await ejs.renderFile('./utils/pdfManager/template.ejs', {
+    console.log(__dirname);
+    const file: string = await ejs.renderFile('lib/ejs_templates/template.ejs', {
       assets, liabilities, total, assetTotal, liabilityTotal,
-    }).catch((e) => e);
+    }).catch((e) => { console.log(e); return ''; });
     return file;
   }
 
@@ -34,7 +35,7 @@ class PdfManager {
     return new Promise((resolve) => {
       if (data == '') resolve(new Error('Invalid data string'));
       const fileName: string = v4();
-      pdf.create(data, { format: 'A4' }).toFile(`./public/pdf/${fileName}.pdf`, (err: Error, res: pdf.FileInfo) => {
+      pdf.create(data, { format: 'A4' }).toFile(`public/pdf/${fileName}.pdf`, (err: Error, res: pdf.FileInfo) => {
         if (err || res == null) return resolve(err);
         res.filename = `${fileName}.pdf`;
         return resolve(res);
