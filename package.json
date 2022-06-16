@@ -10,6 +10,7 @@
         "start:dev": "nodemon index.ts",
         "start": "node build/index.js",
         "build": "tsc",
+        "build2": "esbuild src/index.ts --bundle --outfile=yeet/app.js --platform=node --external:phantom",
         "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register '**/*.spec.ts'"
     },
     "dependencies": {
@@ -31,6 +32,7 @@
         "@types/mocha": "^9.1.1",
         "@typescript-eslint/eslint-plugin": "^5.28.0",
         "@typescript-eslint/parser": "^5.28.0",
+        "esbuild": "^0.14.44",
         "eslint": "^7.32.0 || ^8.2.0",
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-plugin-import": "^2.25.2",

@@ -19,7 +19,6 @@ class PdfManager {
     const assetTotal: number = assets.reduce((pV, cV) => pV + cV.value, 0);
     const liabilityTotal: number = liabilities.reduce((pV, cV) => pV + cV.value, 0);
     const total: number = assetTotal - liabilityTotal;
-    console.log(__dirname);
     const file: string = await ejs.renderFile('lib/ejs_templates/template.ejs', {
       assets, liabilities, total, assetTotal, liabilityTotal,
     }).catch((e) => { console.log(e); return ''; });
