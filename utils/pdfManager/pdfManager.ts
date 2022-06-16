@@ -1,6 +1,5 @@
 import ejs from 'ejs';
 import pdf from 'html-pdf';
-import path from 'path';
 import { v4 } from 'uuid';
 
 export interface balanceItem {
@@ -20,7 +19,7 @@ class PdfManager {
     const assetTotal: number = assets.reduce((pV, cV) => pV + cV.value, 0);
     const liabilityTotal: number = liabilities.reduce((pV, cV) => pV + cV.value, 0);
     const total: number = assetTotal - liabilityTotal;
-    const file: string = await ejs.renderFile(path.join(__dirname, 'template.ejs'), {
+    const file: string = await ejs.renderFile('./utils/pdfManager/template.ejs', {
       assets, liabilities, total, assetTotal, liabilityTotal,
     }).catch((e) => e);
     return file;
@@ -36,9 +35,9 @@ class PdfManager {
       if (data == '') resolve(new Error('Invalid data string'));
       const fileName: string = v4();
       pdf.create(data, { format: 'A4' }).toFile(`./public/pdf/${fileName}.pdf`, (err: Error, res: pdf.FileInfo) => {
-        if (err || res == null) resolve(err);
+        if (err || res == null) return resolve(err);
         res.filename = `${fileName}.pdf`;
-        resolve(res);
+        return resolve(res);
       });
     });
   }

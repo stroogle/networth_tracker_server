@@ -8,6 +8,8 @@
     "license": "MIT",
     "scripts": {
         "start:dev": "nodemon index.ts",
+        "start": "node build/index.js",
+        "build": "tsc",
         "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register '**/*.spec.ts'"
     },
     "dependencies": {
