@@ -6,32 +6,94 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.3.5/tailwind.css"> -->
     <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
         body {
             padding: 1rem;
+        }
+
+        .balanceContainer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+        }
+
+        ul {
+            list-style: none;
+            display: inline-block;
+            width: calc(50% - 1rem);
+        }
+
+        li {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .assetList {
+            padding-right: 15px;
+        }
+
+        .itemValue {
+            float: right;
         }
     </style>
 </head>
 
 <body>
     <h1>Net Worth Sheet</h1>
-    <ul>
-        <% assets.forEach(asset=> { %>
-            <li>
-                <%= asset.name %>
-            </li>
-            <% }) %>
-    </ul>
-    <ul>
-        <% liabilities.forEach( liability=> { %>
-            <li>
-                <%= liability.name %>
-            </li>
-            <% }) %>
-    </ul>
+    <div class="balanceContainer">
+        <ul class="assetList">
+            <% assets.forEach(asset=> { %>
+                <li class="text-blue-500">
+                    <span class="itemName">
+                        <%= asset.name %>
+                    </span>
+                    <span class="itemValue">
+                        $<%= asset.value %>
+                    </span>
+
+                </li>
+                <% }) %>
+                    <li>
+                        <span class="itemName">
+                            Total Assets
+                        </span>
+                        <span class="itemValue">
+                            $<%= assetTotal %>
+                        </span>
+                    </li>
+        </ul>
+        <ul class="w-full">
+            <% liabilities.forEach( liability=> { %>
+                <li>
+                    <span class="itemName">
+                        <%= liability.name %>
+                    </span>
+                    <span class="itemValue">
+                        $<%= liability.value %>
+                    </span>
+                </li>
+                <% }) %>
+                    <li>
+                        <span class="itemName">
+                            Total Liabilities
+                        </span>
+                        <span class="itemValue">
+                            $<%= liabilityTotal %>
+                        </span>
+                    </li>
+        </ul>
+    </div>
+
 
     <b>
-        <%= total %>
+        Net Position: $<%= total %>
     </b>
 </body>
 
