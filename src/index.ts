@@ -11,6 +11,10 @@ const port = 3001;
 app.use(express.json());
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.send('hi there');
+});
+
 app.use('/pdf', pdfRoute);
 app.use('/pdfs', staticRoute);
 
