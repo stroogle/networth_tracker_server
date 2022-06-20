@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('hi there');
+  res.send('hello there');
 });
 
 app.use('/pdf', pdfRoute);
