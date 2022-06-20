@@ -27,7 +27,8 @@
               "tsx": "never"
             }
          ],
-         "eqeqeq": "off"
+         "eqeqeq": "off",
+         "linebreak-style": ["error", "windows"]
     },
     "settings": {
         "import/resolver": {
