@@ -37,7 +37,9 @@ class PdfManager {
    * @returns true if pdf document is created, false otherwise
    */
   static async save(data: string): Promise<{filename: string}> {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox'],
+    });
 
     const page = await browser.newPage();
 
