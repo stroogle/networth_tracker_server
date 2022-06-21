@@ -1,0 +1,70 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Document
+        style(type="text/css").
+            * {
+                padding: 0;
+                margin: 0;
+            }
+
+            body {
+                padding: 1rem;
+            }
+
+            ul {
+                list-style-type: none;
+            }
+
+            .outItemContainer {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                width: 100%;
+                column-gap: 1rem;
+            }
+
+            .list {
+                width: 100%;
+            }
+
+            .item {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .itemName {
+
+            }
+
+            .itemValue {
+
+            }
+
+    body 
+        h1 Net Worth Sheet
+
+        .outItemContainer
+            .innerItemContainer
+                p Assets
+                ul(class="list")
+                    each item in assets
+                        li(class="item") 
+                            span(class="itemName")= item.name 
+                            span(class="itemValue")= `$${item.value}`
+                    
+                    li Total Assets: $#{assetTotal}
+            .innerItemContainer
+                p Liabailities
+                ul
+                    each item in liabilities
+                        li 
+                            span= item.name 
+                            span= `$${item.value}`
+                    
+                    li Total Liabilities: $#{liabilityTotal}
+
+        p Net Position: $#{total}

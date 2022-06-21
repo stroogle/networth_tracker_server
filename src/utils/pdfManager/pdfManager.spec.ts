@@ -1,7 +1,8 @@
 import { expect } from 'chai';
 import PdfManager, { balanceItem } from './pdfManager';
 
-describe('PdfManager Create Tests', () => {
+describe('PdfManager Create Tests', function () {
+  this.timeout(10000);
   let assets: balanceItem[];
   let liabilities: balanceItem[];
 
