@@ -1,4 +1,4 @@
-import ejs from 'ejs';
+import pug from 'pug';
 import pdf from 'html-pdf';
 import { v4 } from 'uuid';
 
@@ -15,13 +15,19 @@ class PdfManager {
      * @returns html string, or if params are invalid and empty string
      */
   static async create(assets: balanceItem[], liabilities: balanceItem[]): Promise<string> {
+    // Check args are valid
     if (assets.length == 0 || liabilities.length == 0) return '';
+
+    // Assets totals
     const assetTotal: number = assets.reduce((pV, cV) => pV + cV.value, 0);
     const liabilityTotal: number = liabilities.reduce((pV, cV) => pV + cV.value, 0);
     const total: number = assetTotal - liabilityTotal;
-    const file: string = await ejs.renderFile('lib/ejs_templates/template.ejs', {
+
+    // Create html string
+    const file: string = pug.renderFile('lib/pug_templates/template.pug', {
       assets, liabilities, total, assetTotal, liabilityTotal,
-    }).catch((e) => { console.log(e); return ''; });
+    });
+
     return file;
   }
 
