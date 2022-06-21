@@ -23,10 +23,6 @@ describe('PdfManager Create Tests', function () {
         name: 'item #1',
         value: 100,
       },
-      {
-        name: 'item #2',
-        value: 50,
-      },
     ];
   });
 
