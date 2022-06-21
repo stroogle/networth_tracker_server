@@ -9,3 +9,23 @@ html(lang="en")
 
     body 
         h1 Net Worth Sheet
+
+        p Assets
+        ul
+            each item in assets
+                li 
+                    span= item.name 
+                    span= `$${item.value}`
+            
+            li Total Assets: $#{assetTotal}
+
+        p Liabailities
+        ul
+            each item in liabilities
+                li 
+                    span= item.name 
+                    span= `$${item.value}`
+            
+            li Total Liabilities: $#{liabilityTotal}
+
+        p Net Position: $#{total}
