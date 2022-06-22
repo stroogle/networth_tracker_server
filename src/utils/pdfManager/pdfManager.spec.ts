@@ -5,6 +5,7 @@ describe('PdfManager Create Tests', function () {
   this.timeout(10000);
   let assets: balanceItem[];
   let liabilities: balanceItem[];
+  const currencySymbol: string = '^';
 
   beforeEach(() => {
     assets = [
@@ -29,13 +30,13 @@ describe('PdfManager Create Tests', function () {
   it('Empty Parameters', async () => {
     assets = [];
     liabilities = [];
-    const item: string = await PdfManager.create(assets, liabilities);
+    const item: string = await PdfManager.create(assets, liabilities, currencySymbol);
     expect(item).to.be.a('string');
     expect(item).to.have.lengthOf(0);
   });
 
   it('Valid Parameters', async () => {
-    const item: string = await PdfManager.create(assets, liabilities);
+    const item: string = await PdfManager.create(assets, liabilities, currencySymbol);
     expect(item).to.be.a('string');
     expect(item.length).to.be.greaterThan(0);
     await PdfManager.save(item);

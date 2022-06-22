@@ -37,6 +37,16 @@ const bodySchema: Schema = {
   'liabilities.*.value': {
     isNumeric: true,
   },
+  currencySymbol: {
+    isString: true,
+    isLength: {
+      options: {
+        min: 1,
+        max: 1,
+      },
+    },
+    errorMessage: 'Request must have currency symbol',
+  },
 };
 
 router.post(
@@ -47,7 +57,11 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const sheet: string = await PdfManager.create(req.body.assets, req.body.liabilities);
+    const sheet: string = await PdfManager.create(
+      req.body.assets,
+      req.body.liabilities,
+      req.body.currencySymbol,
+    );
     const fileInfo: pdf.FileInfo | Error = await PdfManager.save(sheet);
     if (fileInfo instanceof Error) {
       return res.status(500).json({

@@ -14,7 +14,11 @@ class PdfManager {
      * @param liabilities an array of balance items
      * @returns html string, or if params are invalid and empty string
      */
-  static async create(assets: balanceItem[], liabilities: balanceItem[]): Promise<string> {
+  static async create(
+    assets: balanceItem[],
+    liabilities: balanceItem[],
+    currencySymbol: string,
+  ): Promise<string> {
     // Check args are valid
     if (assets.length == 0 || liabilities.length == 0) return '';
 
@@ -25,7 +29,7 @@ class PdfManager {
 
     // Create html string
     const file: string = pug.renderFile('lib/pug_templates/template.pug', {
-      assets, liabilities, total, assetTotal, liabilityTotal,
+      assets, liabilities, total, assetTotal, liabilityTotal, currencySymbol,
     });
 
     return file;
