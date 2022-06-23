@@ -5,7 +5,7 @@ describe('PdfManager Create Tests', function () {
   this.timeout(10000);
   let assets: balanceItem[];
   let liabilities: balanceItem[];
-  const currencySymbol: string = '^';
+  const currencySymbol: string = '$';
 
   beforeEach(() => {
     assets = [

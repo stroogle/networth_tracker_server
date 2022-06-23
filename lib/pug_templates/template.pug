@@ -11,27 +11,40 @@ html(lang="en")
                 padding: 1rem;
             }
 
-    body 
-        h1 Net Worth Sheet
+    body.grid.grid-cols-1.gap-y-4 
+        h1.text-lg.font-bold Net Worth Sheet
 
-        .grid.grid-cols-2.gap-x-4
-            .innerItemContainer
-                p Assets
-                ul.w-full
+        div.grid.grid-cols-2.gap-x-4
+            div.grid.grid-cols-1.gap-y-4.h-fit
+                div.inline-grid.grid-cols-1.gap-y-1
+                    p.font-bold Assets
+                    div.inline-block.h-1.bg-blue-400.rounded-full
+                ul.w-full.grid.grid-cols-1.gap-y-2
                     each item in assets
                         li.w-full.flex.justify-between
                             span= item.name 
                             span= `${currencySymbol}${item.value}`
                     
-                    li Total Assets: #{currencySymbol}#{assetTotal}
-            .innerItemContainer
-                p Liabailities
-                ul
+                    li.w-full.flex.justify-between.py-2.font-bold
+                            span Total 
+                            span #{currencySymbol}#{assetTotal}
+
+            div.grid.grid-cols-1.gap-y-4.h-fit
+                div.inline-grid.grid-cols-1.gap-y-1
+                    p.font-bold Liabilities
+                    div.inline-block.h-1.bg-blue-400.rounded-full
+                ul.w-full.grid.grid-cols-1.gap-y-2
                     each item in liabilities
                         li.w-full.flex.justify-between
                             span= item.name 
                             span= `${currencySymbol}${item.value}`
                     
-                    li Total Liabilities: #{currencySymbol}#{liabilityTotal}
+                    li.w-full.flex.justify-between.py-2.font-bold
+                            span Total 
+                            span #{currencySymbol}#{liabilityTotal}
 
-        p Net Position: #{currencySymbol}#{total}
+        .grid.grid-cols-1.gap-y-2
+            div.grid.grid-cols-1.gap-y-1
+                p.text-base.font-bold Net Position
+                div.inline-block.h-1.bg-blue-400.rounded-full
+            p.font-bold.text-base #{currencySymbol}#{total}
