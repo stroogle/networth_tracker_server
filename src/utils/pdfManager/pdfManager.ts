@@ -1,6 +1,7 @@
 import pug from 'pug';
 import { v4 } from 'uuid';
 import puppeteer from 'puppeteer';
+import dataParser from '../dataParser/dataParser';
 
 export interface balanceItem {
     name: string;
@@ -27,9 +28,12 @@ class PdfManager {
     const liabilityTotal: number = liabilities.reduce((pV, cV) => pV + cV.value, 0);
     const total: number = assetTotal - liabilityTotal;
 
+    // Organise chart data
+    const chartData = dataParser.formChartData(assets);
+
     // Create html string
     const file: string = pug.renderFile('lib/pug_templates/template.pug', {
-      assets, liabilities, total, assetTotal, liabilityTotal, currencySymbol,
+      assets, liabilities, total, assetTotal, liabilityTotal, currencySymbol, chartData,
     });
 
     return file;
@@ -47,7 +51,9 @@ class PdfManager {
 
     const page = await browser.newPage();
 
-    await page.setContent(data, { waitUntil: 'domcontentloaded' });
+    await page.setContent(data, { waitUntil: ['load', 'networkidle0', 'domcontentloaded'] });
+
+    await page.waitForSelector('#myChart', { hidden: false });
 
     await page.emulateMediaType('screen');
 

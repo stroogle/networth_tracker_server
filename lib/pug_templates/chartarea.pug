@@ -1,0 +1,22 @@
+script(src="https://cdn.jsdelivr.net/npm/chart.js")
+
+div.h-96.w-96
+    canvas(id="myChart" style="display: none")
+
+script.
+    var ctx = document.getElementById("myChart").getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'doughnut',
+        data: !{JSON.stringify(chartData)},
+        options: {
+            animation: null,
+            title: {
+                display: true,
+                text: "chart"
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }
+    });
+    document.getElementById("myChart").style.display = "block"

@@ -34,7 +34,7 @@ html(lang="en")
                             span= item.name 
                             span= `${currencySymbol}${item.value}`
                     
-                    li.w-full.flex.justify-between.py-2.font-bold
+                    li.w-full.flex.justify-between.font-bold
                             span Total 
                             span #{currencySymbol}#{assetTotal}
 
@@ -48,7 +48,7 @@ html(lang="en")
                             span= item.name 
                             span= `${currencySymbol}${item.value}`
                     
-                    li.w-full.flex.justify-between.py-2.font-bold
+                    li.w-full.flex.justify-between.font-bold
                             span Total 
                             span #{currencySymbol}#{liabilityTotal}
 
@@ -57,3 +57,5 @@ html(lang="en")
                 p.text-base.font-bold Net Position
                 div.inline-block.h-1.bg-blue-400.rounded-full
             p.font-bold.text-base #{currencySymbol}#{total}
+
+        include chartarea.pug
