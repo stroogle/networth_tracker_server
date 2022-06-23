@@ -11,7 +11,16 @@ html(lang="en")
                 padding: 1rem;
             }
 
-    body.grid.grid-cols-1.gap-y-4 
+        script.
+            tailwind.config = {
+                theme: {
+                    fontFamily: {
+                        'sans': ['Helvetica', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+
+    body.grid.grid-cols-1.gap-y-4.font-sans
         h1.text-lg.font-bold Net Worth Sheet
 
         div.grid.grid-cols-2.gap-x-4
