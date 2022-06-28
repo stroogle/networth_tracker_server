@@ -30,10 +30,18 @@ class PdfManager {
 
     // Organise chart data
     const chartData = dataParser.formChartData(assets);
+    const liabilityChartData = dataParser.formChartData(liabilities);
 
     // Create html string
     const file: string = pug.renderFile('lib/pug_templates/template.pug', {
-      assets, liabilities, total, assetTotal, liabilityTotal, currencySymbol, chartData,
+      assets,
+      liabilities,
+      total,
+      assetTotal,
+      liabilityTotal,
+      currencySymbol,
+      chartData,
+      liabilityChartData,
     });
 
     return file;
@@ -47,6 +55,7 @@ class PdfManager {
   static async save(data: string): Promise<{filename: string}> {
     const browser = await puppeteer.launch({
       args: ['--no-sandbox'],
+      defaultViewport: null,
     });
 
     const page = await browser.newPage();

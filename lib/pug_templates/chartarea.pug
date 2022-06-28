@@ -1,7 +1,10 @@
 script(src="https://cdn.jsdelivr.net/npm/chart.js")
 
-div.h-96.w-96
-    canvas(id="myChart" style="display: none")
+div.w-full.flex.justify-around
+    div.w-80
+        canvas(id="myChart" style="display: none")
+    div.w-80
+        canvas(id="myChart2" style="display: none")
 
 script.
     var ctx = document.getElementById("myChart").getContext('2d');
@@ -19,4 +22,21 @@ script.
             }
         }
     });
+
+    var ctx2 = document.getElementById("myChart2").getContext('2d');
+    var chart2 = new Chart(ctx2, {
+        type: 'doughnut',
+        data: !{JSON.stringify(liabilityChartData)},
+        options: {
+            animation: null,
+            title: {
+                display: true,
+                text: "chart"
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }
+    });
+    document.getElementById("myChart2").style.display = "block"
     document.getElementById("myChart").style.display = "block"
