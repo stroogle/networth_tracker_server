@@ -11,13 +11,21 @@ interface chartData {
     ]
 }
 
+const colourPalette = [
+  '#000000',
+  '#5D737E',
+  '#FFF07C',
+  '#F0F7EE',
+  '#87BBA2',
+];
+
+let currentColours = [...colourPalette];
+
 class dataParser {
   static randomColour():string {
-    const letters: string = '0123456789ABCDEF';
+    if (currentColours.length == 0) currentColours = [...colourPalette];
 
-    let color: string = '#';
-
-    for (let i = 0; i < 6; i += 1) color += letters[(Math.floor(Math.random() * 16))];
+    const color: string = currentColours.pop() || '#000000';
 
     return color;
   }
