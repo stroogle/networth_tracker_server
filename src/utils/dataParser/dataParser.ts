@@ -1,4 +1,4 @@
-import { balanceItem } from '../pdfManager/pdfManager';
+import { balanceItem, AdvancedBalanceItem } from '../pdfManager/pdfManager';
 
 interface chartData {
     labels: string[];
@@ -42,6 +42,24 @@ class dataParser {
     });
 
     return chartItems;
+  }
+
+  /**
+   * Creates and array of numbers that has the expected net position
+   * of assets/liabilities over a number of years
+   * @param assets - An array of advanced balance items
+   * @param liabilities - An array of advanced balance items
+   * @param numOfYears - The amount of years to estimate data for
+   * @returns array of numbers that is the expected value over the following years
+   */
+  static getLineChartData(
+    assets: AdvancedBalanceItem[],
+    liabilities: AdvancedBalanceItem,
+    numOfYears: number,
+  ): number[] {
+    const nums: number[] = [];
+
+    return nums;
   }
 }
 

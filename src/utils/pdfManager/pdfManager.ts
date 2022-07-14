@@ -8,6 +8,11 @@ export interface balanceItem {
     value: number;
 }
 
+export interface AdvancedBalanceItem extends balanceItem {
+    direction: 1 | -1;
+    rateOfChange: number;
+}
+
 class PdfManager {
   /**
      * Async function that creates an html string from the ejs template
