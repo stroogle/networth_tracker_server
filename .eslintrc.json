@@ -28,7 +28,8 @@
             }
          ],
          "eqeqeq": "off",
-         "linebreak-style": "off"
+         "linebreak-style": "off",
+         "max-len": "off"
     },
     "settings": {
         "import/resolver": {

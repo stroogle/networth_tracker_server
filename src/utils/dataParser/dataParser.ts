@@ -6,7 +6,8 @@ interface chartData {
         {
             label: string;
             data: number[];
-            backgroundColor: string[];
+            backgroundColor?: string[];
+            borderColor?: string;
         }
     ]
 }
@@ -46,7 +47,9 @@ class dataParser {
 
       chartItems.datasets[0].data.push(e.value);
 
-      chartItems.datasets[0].backgroundColor.push(this.randomColour());
+      if (chartItems.datasets[0].backgroundColor != undefined) {
+        chartItems.datasets[0].backgroundColor.push(this.randomColour());
+      }
     });
 
     return chartItems;
@@ -62,12 +65,42 @@ class dataParser {
    */
   static getLineChartData(
     assets: AdvancedBalanceItem[],
-    liabilities: AdvancedBalanceItem,
+    liabilities: AdvancedBalanceItem[],
     numOfYears: number,
-  ): number[] {
+  ): chartData {
     const nums: number[] = [];
+    const years: string[] = [];
 
-    return nums;
+    for (let i = 0; i < numOfYears; i += 1) {
+      const year = new Date().getFullYear();
+      years.push((year + i).toString());
+
+      const assetNum: number = assets.reduce((pV, cV): number => {
+        const val = cV.value;
+        const inside = 1 + cV.rateOfChange * cV.direction;
+        return pV + (val * inside ** i);
+      }, 0);
+
+      const liabilityNum: number = liabilities.reduce((pV, cV): number => {
+        const val = cV.value;
+        const inside = 1 + cV.rateOfChange * cV.direction;
+        const next = (val * inside ** i) > 0 ? (val * inside ** i) : 0;
+        return pV + next;
+      }, 0);
+
+      nums.push(assetNum - liabilityNum);
+    }
+
+    return {
+      labels: years,
+      datasets: [
+        {
+          label: `${numOfYears} year prediction`,
+          data: nums,
+          borderColor: '#34D399',
+        },
+      ],
+    };
   }
 }
 

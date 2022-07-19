@@ -1,0 +1,24 @@
+script(src="https://cdn.jsdelivr.net/npm/chart.js")
+
+div.w-full.flex.justify-around
+    div.w-full
+        canvas(id="advancedChart")
+
+script.
+    var ctx3 = document.getElementById("advancedChart").getContext('2d');
+    var chart3 = new Chart(ctx3, {
+        type: 'line',
+        data: !{JSON.stringify(advancedChartData)},
+        options: {
+            animation: null,
+            title: {
+                display: true,
+                text: "chart"
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }
+    });
+
+    //- document.getElementById("advancedChart").style.display = "block"

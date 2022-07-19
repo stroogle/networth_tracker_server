@@ -59,3 +59,6 @@ html(lang="en")
             p.font-bold.text-base #{currencySymbol}#{total}
 
         include chartarea.pug
+
+        if isAdvanced
+            include advancedChart.pug

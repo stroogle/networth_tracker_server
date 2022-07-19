@@ -47,6 +47,43 @@ class PdfManager {
       currencySymbol,
       chartData,
       liabilityChartData,
+      isAdvanced: false,
+    });
+
+    return file;
+  }
+
+  static async createAdvanced(
+    assets: AdvancedBalanceItem[],
+    liabilities: AdvancedBalanceItem[],
+    currencySymbol: string,
+  ): Promise<string> {
+    // Check args are valid
+    if (assets.length == 0 || liabilities.length == 0) return '';
+
+    // Assets totals
+    const assetTotal: number = assets.reduce((pV, cV) => pV + cV.value, 0);
+    const liabilityTotal: number = liabilities.reduce((pV, cV) => pV + cV.value, 0);
+    const total: number = assetTotal - liabilityTotal;
+
+    // Organise chart data
+    const chartData = dataParser.formChartData(assets);
+    const liabilityChartData = dataParser.formChartData(liabilities);
+
+    const advancedChartData = dataParser.getLineChartData(assets, liabilities, 10);
+
+    // Create html string
+    const file: string = pug.renderFile('lib/pug_templates/template.pug', {
+      assets,
+      liabilities,
+      total,
+      assetTotal,
+      liabilityTotal,
+      currencySymbol,
+      chartData,
+      liabilityChartData,
+      isAdvanced: true,
+      advancedChartData,
     });
 
     return file;
